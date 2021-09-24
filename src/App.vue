@@ -2,10 +2,10 @@
   <h1>VMail Inbox</h1>
 
   <Suspense>
-    <template v-slot:default>
+    <template #default>
       <MailTable />
     </template>
-    <template v-slot:fallback>
+    <template #fallback>
       Loading....
     </template>
   </Suspense>
@@ -14,14 +14,12 @@
 
 <script>
 import MailTable from '@/components/MailTable.vue'
-import useEmailSelection from '@/composables/use-email-selection'
 
 export default {
   name: 'App',
   components: { MailTable },
   setup() {
     return {
-      emailSelection: useEmailSelection()
     }
   }
 };
