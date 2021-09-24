@@ -1,6 +1,6 @@
 <template>
   <div class="modal">
-    <div class="overlay" @click="closeModal"></div>
+    <div class="overlay" @click='emit("closeModal")'></div>
     <div class="modal-card">
       <slot />
     </div>
@@ -8,21 +8,21 @@
 </template>
 
 <script>
-  import { useKeydown } from '../composition/useKeydown';
+import useKeydown from '../composables/use-keydown.js'
 
-  export default {
-    setup({closeModal}){
-      useKeydown([{key: 'Escape', fn: closeModal}])
-    },
-    props: {
-      closeModal: {
-        type: Function,
-        required: true
-      }
+export default {
+  setup(props, { emit }) {
+    useKeydown([
+      {key: 'Escape', fn: () => { emit('closeModal') }} ,
+    ])
+
+    return {
+      emit
     }
   }
+}
 </script>
 
-<style scoped>
+<style>
 
 </style>
